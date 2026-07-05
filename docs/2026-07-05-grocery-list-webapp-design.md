@@ -215,12 +215,15 @@
 
 ---
 
-## 9. Open Items — ยังต้องเติม/ตัดสินก่อน wireframe
+## 9. Open Items
 
-- **Logic การแนะนำ**: "แนะนำตาม spec" ทำงานยังไง (rule-based?) — กำหนดก่อน ถึงจะรู้ว่า wizard ต้องถามอะไรครบ
-- **Success metrics**: ยังไม่นิยาม — *เสนอเบื้องต้น*: % ผู้ใช้ที่กด export ลิสต์, จำนวนแผนที่เซฟ, % กลับมาทำ Restock รอบ 2
-- **หน้า/สถานะที่ยังไม่อยู่ใน sitemap**: empty state (แผนว่าง), no-result / เกินงบมาก, error, legal (privacy/terms — จำเป็นเมื่อมี account)
-- **Smart Bundle**: เป็น module ใน Product Detail หรือหน้าเดี่ยว — ยังต้องตัดสิน
+**✅ ปิดแล้ว** (ดู [recommendation-logic-and-metrics.md](2026-07-05-recommendation-logic-and-metrics.md))
+- Recommendation logic (rule-based 5 ขั้น + over-budget rules)
+- Success metrics (North Star + 5 รอง + guardrail)
+- Smart Bundle = module ใน Product Detail (ไม่ใช่หน้าเดี่ยว)
+
+**ยังค้าง** (ไม่บล็อก wireframe หน้าเกินงบ)
+- **หน้า/สถานะที่ยังไม่อยู่ใน sitemap**: empty state (แผนว่าง), no-result, error, legal (privacy/terms — จำเป็นเมื่อมี account)
 - **ภาษา**: ไทยอย่างเดียว หรือ ไทย/อังกฤษ
 - **Web push บน iOS Safari** จำกัด → ฟีเจอร์เตือน Restock ควรมี fallback (email)
 - **งบ 5,000 อาจตึง** สำหรับของถาวร+สิ้นเปลืองครบห้อง → กรณีเกินงบอาจเกิดบ่อย ยิ่งย้ำว่า UX จัดการเกินงบต้องดี
