@@ -5,8 +5,9 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Recommendation\RecommendationService;
 use App\Recommendation\Spec;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 function makeProduct(array $attrs): Product
 {
