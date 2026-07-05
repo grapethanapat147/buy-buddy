@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grocery List Web App — Wireframes</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{
+--surface-0:#faf9f7;--surface-1:#f1efe9;--surface-2:#ffffff;
+--text-primary:#2b2a28;--text-secondary:#6b6a65;--text-muted:#9c9a92;
+--border:#e7e5df;--border-strong:#d8d5cd;--border-accent:#85b7eb;--radius:8px;
+--bg-accent:#e6f1fb;--text-accent:#185fa5;
+--bg-danger:#fcebeb;--text-danger:#a32d2d;
+--bg-success:#eaf3de;--text-success:#3b6d11;
+--bg-warning:#faeeda;--text-warning:#854f0b;
+}
+@media (prefers-color-scheme:dark){:root{
+--surface-0:#191917;--surface-1:#232320;--surface-2:#2c2b28;
+--text-primary:#f0efe9;--text-secondary:#b4b2a9;--text-muted:#888780;
+--border:#3a3934;--border-strong:#4a4842;--border-accent:#185fa5;
+--bg-accent:#0c447c;--text-accent:#b5d4f4;
+--bg-danger:#501313;--text-danger:#f09595;
+--bg-success:#173404;--text-success:#c0dd97;
+--bg-warning:#412402;--text-warning:#fac775;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-0);color:var(--text-primary);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;line-height:1.5}
+.page{max-width:720px;margin:0 auto;padding:32px 16px 80px}
+.page > header{margin-bottom:8px}
+.page > header h1{font-size:22px;font-weight:500;margin:0 0 4px}
+.page > header p{color:var(--text-secondary);font-size:14px;margin:0}
+section{margin-top:40px}
+section > h2{font-size:16px;font-weight:500;margin:0 0 4px}
+section > .cap{color:var(--text-secondary);font-size:13px;margin:0 0 12px}
+.frame{background:var(--surface-1);border-radius:12px;padding:16px}
+.screen{background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden}
+button{font-family:inherit}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+<h1>Grocery List Web App — Wireframes</h1>
+<p>ชุด wireframe หน้าจอหลัก (v1 · 5 ก.ค. 68) — เปิดไฟล์นี้ในเบราว์เซอร์ได้เลย รองรับ light/dark ตามระบบ</p>
+</header>
+
+<section>
+<h2>1. Onboarding Wizard</h2>
+<p class="cap">ถามทีละข้อ + live preview ยอดขยับสด</p>
+<div class="frame"><div class="screen">
+<div style="padding:16px 18px 12px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+<span style="font-size:12px;color:var(--text-secondary)">ขั้น 3 จาก 5</span>
+<span style="font-size:12px;color:var(--text-accent);cursor:pointer">ข้ามไป Browse →</span>
+</div>
+<div style="height:6px;border-radius:999px;background:var(--surface-1);overflow:hidden"><div style="width:60%;height:100%;background:var(--text-primary)"></div></div>
+</div>
+<div style="padding:6px 18px 4px">
+<div style="font-size:18px;font-weight:500;color:var(--text-primary);margin-bottom:2px">ทำอาหารเองบ่อยแค่ไหน</div>
+<div style="font-size:13px;color:var(--text-secondary)">ใช้เลือกของหมวดครัวให้พอดี ไม่ซื้อเกิน</div>
+</div>
+<div style="padding:12px 18px 4px">
+<div style="display:flex;align-items:center;gap:12px;border:0.5px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:9px">
+<i class="ti ti-tools-off" style="font-size:22px;color:var(--text-secondary)"></i>
+<div style="flex:1"><div style="font-size:14px">ไม่ทำเลย</div><div style="font-size:12px;color:var(--text-muted)">กินนอกบ้าน หรือสั่งเป็นหลัก</div></div>
+<i class="ti ti-circle" style="font-size:20px;color:var(--text-muted)"></i>
+</div>
+<div style="display:flex;align-items:center;gap:12px;border:2px solid var(--border-accent);background:var(--bg-accent);border-radius:12px;padding:13px 14px;margin-bottom:9px">
+<i class="ti ti-tools-kitchen-2" style="font-size:22px;color:var(--text-accent)"></i>
+<div style="flex:1"><div style="font-size:14px;font-weight:500">ทำบ้าง</div><div style="font-size:12px;color:var(--text-accent)">ราว 2–3 มื้อต่อสัปดาห์</div></div>
+<i class="ti ti-circle-check" style="font-size:22px;color:var(--text-accent)"></i>
+</div>
+<div style="display:flex;align-items:center;gap:12px;border:0.5px solid var(--border);border-radius:12px;padding:13px 14px">
+<i class="ti ti-cooker" style="font-size:22px;color:var(--text-secondary)"></i>
+<div style="flex:1"><div style="font-size:14px">ทำบ่อย</div><div style="font-size:12px;color:var(--text-muted)">เกือบทุกวัน</div></div>
+<i class="ti ti-circle" style="font-size:20px;color:var(--text-muted)"></i>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;margin:14px 18px;padding:12px 14px;background:var(--surface-1);border-radius:12px">
+<i class="ti ti-eye" style="font-size:20px;color:var(--text-secondary)"></i>
+<div style="flex:1"><div style="font-size:12px;color:var(--text-secondary)">ชุดที่แนะนำตอนนี้ (ขยับตามคำตอบ)</div><div style="font-size:15px;font-weight:500">18 ชิ้น · ฿4,650</div></div>
+<span style="font-size:12px;color:var(--text-success);background:var(--bg-success);padding:2px 10px;border-radius:999px">อยู่ในงบ</span>
+</div>
+<div style="display:flex;gap:8px;padding:0 18px 16px">
+<button style="background:transparent;color:var(--text-secondary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:11px 16px;font-size:14px;cursor:pointer"><i class="ti ti-arrow-left"></i> ย้อนกลับ</button>
+<button style="flex:1;background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);padding:11px;font-size:14px;font-weight:500;cursor:pointer">ถัดไป <i class="ti ti-arrow-right"></i></button>
+</div>
+</div></div>
+</section>
+
+<section>
+<h2>2. Recommendations — ชุดของแนะนำ</h2>
+<p class="cap">ศูนย์กลาง loop · Move-in/Restock · หมวดพับได้ · ป้ายจำเป็น/ถ้ามีงบ</p>
+<div class="frame"><div class="screen">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px">
+<span style="font-size:16px;font-weight:500">ชุดของแนะนำ</span>
+<span style="font-size:12px;color:var(--text-secondary);background:var(--surface-1);padding:3px 10px;border-radius:999px">สตูดิโอ · 1 คน · ทำอาหารบ้าง <i class="ti ti-pencil"></i></span>
+</div>
+<div style="padding:0 18px 12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+<span style="font-size:13px;color:var(--text-secondary)">งบของฉัน</span><span style="font-size:14px">฿4,650 / ฿5,000</span>
+</div>
+<div style="height:8px;border-radius:999px;background:var(--surface-1);overflow:hidden"><div style="width:93%;height:100%;background:var(--text-success);opacity:0.85"></div></div>
+<div style="font-size:12px;color:var(--text-success);margin-top:6px"><i class="ti ti-check"></i> อยู่ในงบ · เหลือ ฿350</div>
+</div>
+<div style="display:flex;gap:8px;padding:0 18px 10px;align-items:center">
+<div style="display:flex;background:var(--surface-1);border-radius:999px;padding:3px">
+<span style="font-size:13px;font-weight:500;color:var(--surface-2);background:var(--text-primary);padding:5px 14px;border-radius:999px">Move-in</span>
+<span style="font-size:13px;color:var(--text-secondary);padding:5px 14px">Restock</span>
+</div>
+<span style="margin-left:auto;font-size:12px;color:var(--text-secondary)"><i class="ti ti-arrows-sort"></i> เรียง: คุ้มค่า</span>
+</div>
+<div style="display:flex;gap:6px;padding:0 18px 14px">
+<span style="font-size:12px;color:var(--text-accent);background:var(--bg-accent);padding:3px 12px;border-radius:999px">ทั้งหมด</span>
+<span style="font-size:12px;color:var(--text-secondary);border:0.5px solid var(--border);padding:3px 12px;border-radius:999px">จำเป็นก่อน</span>
+<span style="font-size:12px;color:var(--text-secondary);border:0.5px solid var(--border);padding:3px 12px;border-radius:999px">ในงบ</span>
+</div>
+<div style="display:flex;align-items:center;padding:10px 18px;background:var(--surface-1)">
+<i class="ti ti-chevron-down" style="color:var(--text-secondary)"></i>
+<span style="font-size:14px;font-weight:500;margin-left:8px">ครัว</span>
+<span style="font-size:12px;color:var(--text-muted);margin-left:8px">4 ชิ้น</span>
+<span style="margin-left:auto;font-size:13px;color:var(--text-secondary)">฿1,140</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;padding:12px 18px">
+<div style="display:flex;gap:10px;align-items:center;border:0.5px solid var(--border);border-radius:12px;padding:10px">
+<div style="width:52px;height:52px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-tools-kitchen-2" style="font-size:24px;color:var(--text-secondary)"></i></div>
+<div style="flex:1;min-width:0"><div style="font-size:14px">หม้อหุงข้าว</div><div style="font-size:12px;color:var(--text-secondary)">คุ้มสุด ฿590 · Shopee</div><span style="font-size:11px;color:var(--text-danger);background:var(--bg-danger);padding:1px 7px;border-radius:999px">จำเป็น</span></div>
+<button style="width:34px;height:34px;border-radius:50%;background:var(--bg-success);color:var(--text-success);border:none;cursor:pointer;flex-shrink:0"><i class="ti ti-check"></i></button>
+</div>
+<div style="display:flex;gap:10px;align-items:center;border:0.5px solid var(--border);border-radius:12px;padding:10px">
+<div style="width:52px;height:52px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-cooker" style="font-size:24px;color:var(--text-secondary)"></i></div>
+<div style="flex:1;min-width:0"><div style="font-size:14px">กระทะ + ตะหลิว</div><div style="font-size:12px;color:var(--text-secondary)">คุ้มสุด ฿250 · Lazada</div><span style="font-size:11px;color:var(--text-danger);background:var(--bg-danger);padding:1px 7px;border-radius:999px">จำเป็น</span></div>
+<button style="width:34px;height:34px;border-radius:50%;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);cursor:pointer;flex-shrink:0"><i class="ti ti-plus"></i></button>
+</div>
+<div style="display:flex;gap:10px;align-items:center;border:0.5px solid var(--border);border-radius:12px;padding:10px">
+<div style="width:52px;height:52px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-bowl" style="font-size:24px;color:var(--text-secondary)"></i></div>
+<div style="flex:1;min-width:0"><div style="font-size:14px">จานชาม เซ็ต 4</div><div style="font-size:12px;color:var(--text-secondary)">คุ้มสุด ฿180 · Shopee</div><span style="font-size:11px;color:var(--text-secondary);background:var(--surface-1);padding:1px 7px;border-radius:999px">ถ้ามีงบ</span></div>
+<button style="width:34px;height:34px;border-radius:50%;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);cursor:pointer;flex-shrink:0"><i class="ti ti-plus"></i></button>
+</div>
+<div style="display:flex;gap:10px;align-items:center;border:0.5px solid var(--border);border-radius:12px;padding:10px">
+<div style="width:52px;height:52px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-glass-full" style="font-size:24px;color:var(--text-secondary)"></i></div>
+<div style="flex:1;min-width:0"><div style="font-size:14px">แก้วน้ำ 6 ใบ</div><div style="font-size:12px;color:var(--text-secondary)">คุ้มสุด ฿120 · Makro</div><span style="font-size:11px;color:var(--text-secondary);background:var(--surface-1);padding:1px 7px;border-radius:999px">ถ้ามีงบ</span></div>
+<button style="width:34px;height:34px;border-radius:50%;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);cursor:pointer;flex-shrink:0"><i class="ti ti-plus"></i></button>
+</div>
+</div>
+<div style="display:flex;align-items:center;padding:12px 18px;border-top:0.5px solid var(--border)">
+<i class="ti ti-chevron-right" style="color:var(--text-secondary)"></i><span style="font-size:14px;font-weight:500;margin-left:8px">เครื่องนอน</span><span style="font-size:12px;color:var(--text-muted);margin-left:8px">3 ชิ้น</span><span style="margin-left:auto;font-size:13px;color:var(--text-secondary)">฿2,580</span>
+</div>
+<div style="display:flex;align-items:center;padding:12px 18px;border-top:0.5px solid var(--border)">
+<i class="ti ti-chevron-right" style="color:var(--text-secondary)"></i><span style="font-size:14px;font-weight:500;margin-left:8px">ทำความสะอาด</span><span style="font-size:12px;color:var(--text-muted);margin-left:8px">5 ชิ้น</span><span style="margin-left:auto;font-size:13px;color:var(--text-secondary)">฿930</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-top:0.5px solid var(--border-strong);background:var(--surface-1)">
+<div style="flex:1"><div style="font-size:12px;color:var(--text-secondary)">ในแผนตอนนี้</div><div style="font-size:15px;font-weight:500">12 ชิ้น · ฿4,650</div></div>
+<button style="background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);padding:11px 16px;font-size:14px;font-weight:500;cursor:pointer">ดูแผนของฉัน <i class="ti ti-arrow-right"></i></button>
+</div>
+</div></div>
+</section>
+
+<section>
+<h2>3. Product Detail</h2>
+<p class="cap">เทียบราคา (คุ้มสุดก่อน) · ราคาอ้างอิง · ทำไมแนะนำ · Smart Bundle</p>
+<div class="frame"><div class="screen">
+<div style="display:flex;gap:14px;padding:16px 18px 8px">
+<div style="width:96px;height:96px;border-radius:12px;background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-tools-kitchen-2" style="font-size:44px;color:var(--text-secondary)"></i></div>
+<div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:500">หม้อหุงข้าว 1.8 ลิตร</div><div style="font-size:13px;color:var(--text-secondary);margin:2px 0 8px">หม้อในเคลือบกันติด · ครัว</div><span style="font-size:11px;color:var(--text-danger);background:var(--bg-danger);padding:2px 9px;border-radius:999px">จำเป็น</span></div>
+</div>
+<div style="display:flex;gap:9px;align-items:flex-start;margin:6px 18px 14px;padding:10px 12px;background:var(--surface-1);border-radius:var(--radius)">
+<i class="ti ti-bulb" style="color:var(--text-secondary);font-size:18px;margin-top:1px"></i>
+<span style="font-size:13px;color:var(--text-secondary);line-height:1.5">ทำไมแนะนำ: ห้องคุณยังไม่มีของหมวดครัว และคุณเลือก "ทำอาหารบ้าง" — ชิ้นนี้อยู่ในงบ</span>
+</div>
+<div style="margin:0 18px 14px;border:0.5px solid var(--border-strong);border-radius:12px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px"><span style="font-size:13px;color:var(--text-secondary)">เทียบราคา</span><span style="font-size:11px;color:var(--text-muted)">ราคาอ้างอิง · อัปเดต 5 ก.ค. 68</span></div>
+<div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-top:0.5px solid var(--border);background:var(--bg-success)">
+<i class="ti ti-building-store" style="font-size:20px;color:var(--text-success)"></i>
+<div style="flex:1"><div style="font-size:14px;font-weight:500">Shopee</div><div style="font-size:12px;color:var(--text-success)">คุ้มสุด</div></div>
+<span style="font-size:16px;font-weight:500">฿590</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-top:0.5px solid var(--border);font-size:13px;color:var(--text-secondary);cursor:pointer"><i class="ti ti-chevron-down"></i> ดูอีก 3 ร้าน (฿610–฿650)</div>
+</div>
+<div style="margin:0 18px 6px;display:flex;align-items:center;gap:6px">
+<i class="ti ti-affiliate" style="color:var(--text-primary);font-size:18px"></i><span style="font-size:14px;font-weight:500">มักซื้อคู่กับ</span><span style="font-size:11px;color:var(--text-accent);background:var(--bg-accent);padding:1px 8px;border-radius:999px">Smart Bundle</span>
+</div>
+<div style="margin:8px 18px 14px;border:0.5px solid var(--border);border-radius:12px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:11px;padding:10px 14px">
+<div style="width:38px;height:38px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-seeding" style="font-size:20px;color:var(--text-secondary)"></i></div>
+<span style="flex:1;font-size:14px">ข้าวสาร 5 กก.</span><span style="font-size:14px;color:var(--text-secondary)">฿180</span>
+</div>
+<div style="display:flex;align-items:center;gap:11px;padding:10px 14px;border-top:0.5px solid var(--border)">
+<div style="width:38px;height:38px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-spoon" style="font-size:20px;color:var(--text-secondary)"></i></div>
+<span style="flex:1;font-size:14px">ทัพพีตักข้าว</span><span style="font-size:14px;color:var(--text-secondary)">฿45</span>
+</div>
+<div style="display:flex;align-items:center;gap:11px;padding:10px 14px;border-top:0.5px solid var(--border)">
+<div style="width:38px;height:38px;border-radius:var(--radius);background:var(--surface-1);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-box" style="font-size:20px;color:var(--text-secondary)"></i></div>
+<span style="flex:1;font-size:14px">กล่องถนอมอาหาร</span><span style="font-size:14px;color:var(--text-secondary)">฿90</span>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-top:0.5px solid var(--border);background:var(--surface-1)">
+<span style="font-size:13px;color:var(--text-secondary)">ทั้งชุด 3 ชิ้น · ฿315</span>
+<button style="background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:7px 12px;font-size:13px;cursor:pointer">ใส่ทั้งชุด</button>
+</div>
+</div>
+<div style="display:flex;gap:8px;padding:0 18px 16px">
+<button style="flex:1;background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);padding:11px;font-size:14px;font-weight:500;cursor:pointer"><i class="ti ti-plus"></i> ใส่ลงแผน</button>
+<button style="flex:1;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:11px;font-size:14px;cursor:pointer">ไปซื้อจริง <i class="ti ti-external-link"></i></button>
+</div>
+<div style="padding:0 18px 14px;font-size:11px;color:var(--text-muted)"><i class="ti ti-info-circle"></i> "ไปซื้อจริง" เป็นลิงก์พันธมิตร · อันดับคุ้มสุดจัดจากราคาจริง ไม่มีการจ่ายเพื่อดันอันดับ</div>
+</div></div>
+</section>
+
+<section>
+<h2>4. My Plan — เกินงบ (ระบบเสนอให้)</h2>
+<p class="cap">เมตรแดง คำพูดอุ่น · ระบบเสนอเลื่อน optional · ของจำเป็นล็อก</p>
+<div class="frame"><div class="screen">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:0.5px solid var(--border)">
+<span style="font-size:16px;font-weight:500">แผนของฉัน</span><span style="font-size:12px;color:var(--text-muted)"><i class="ti ti-user"></i> guest · ยังไม่ได้เซฟ</span>
+</div>
+<div style="display:flex;gap:20px;padding:0 18px;border-bottom:0.5px solid var(--border)">
+<span style="font-size:14px;font-weight:500;padding:10px 0;border-bottom:2px solid var(--text-primary)">รายการ</span>
+<span style="font-size:14px;color:var(--text-secondary);padding:10px 0"><i class="ti ti-calendar"></i> ปฏิทิน</span>
+</div>
+<div style="padding:16px 18px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;color:var(--text-secondary)">งบของฉัน</span><span style="font-size:14px"><span style="color:var(--text-danger);font-weight:500">฿5,120</span> / ฿5,000</span></div>
+<div style="height:10px;border-radius:999px;background:var(--surface-1);overflow:hidden"><div style="width:100%;height:100%;background:var(--text-danger);opacity:0.85"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span style="font-size:12px;color:var(--text-muted)">เส้นงบ ฿5,000</span><span style="font-size:12px;color:var(--text-danger);background:var(--bg-danger);padding:2px 10px;border-radius:999px"><i class="ti ti-alert-triangle"></i> เกินงบ ฿120</span></div>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-start;margin:0 18px 14px;padding:10px 12px;background:var(--bg-warning);border-radius:var(--radius)">
+<i class="ti ti-mood-smile" style="color:var(--text-warning);font-size:18px;margin-top:1px"></i>
+<span style="font-size:13px;color:var(--text-warning);line-height:1.5">เกินงบนิดเดียว ปรับได้ง่าย ๆ — ลองเลื่อนของที่ยังไม่รีบไปซื้อรอบหน้าดูไหม</span>
+</div>
+<div style="margin:0 18px 16px;border:0.5px solid var(--border-strong);border-radius:12px;overflow:hidden">
+<div style="padding:12px 14px;border-bottom:0.5px solid var(--border)"><span style="font-size:14px;font-weight:500"><i class="ti ti-wand"></i> ระบบแนะนำ</span><span style="font-size:13px;color:var(--text-secondary)"> — เลื่อน 2 ชิ้นนี้ไป Restock รอบหน้า</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:10px 14px"><i class="ti ti-calendar-plus" style="color:var(--text-secondary);font-size:18px"></i><div style="flex:1"><div style="font-size:14px">ที่ตากผ้าราว</div><div style="font-size:12px;color:var(--text-muted)">ถ้ามีงบ · priority ต่ำ</div></div><span style="font-size:14px;color:var(--text-secondary)">฿250</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:0.5px solid var(--border)"><i class="ti ti-calendar-plus" style="color:var(--text-secondary);font-size:18px"></i><div style="flex:1"><div style="font-size:14px">กล่องข้าว (ชุด 3)</div><div style="font-size:12px;color:var(--text-muted)">ถ้ามีงบ · priority ต่ำ</div></div><span style="font-size:14px;color:var(--text-secondary)">฿90</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--bg-success);border-top:0.5px solid var(--border)"><span style="font-size:13px;color:var(--text-success)"><i class="ti ti-check"></i> ยอดใหม่หลังเลื่อน</span><span style="font-size:15px;font-weight:500;color:var(--text-success)">฿4,780 · อยู่ในงบ</span></div>
+<div style="display:flex;gap:8px;padding:12px 14px">
+<button style="flex:1;background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);padding:10px;font-size:14px;font-weight:500;cursor:pointer">ยืนยัน เลื่อนไปรอบหน้า</button>
+<button style="background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:10px 14px;font-size:14px;cursor:pointer">เลือกเอง</button>
+</div>
+</div>
+<div style="margin:0 18px 8px;font-size:12px;color:var(--text-secondary)"><i class="ti ti-lock"></i> ของจำเป็น — ระบบไม่แตะให้เอง</div>
+<div style="margin:0 18px 16px">
+<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border)"><i class="ti ti-tools-kitchen-2" style="color:var(--text-secondary);font-size:18px"></i><span style="flex:1;font-size:14px">หม้อหุงข้าว</span><span style="font-size:11px;color:var(--text-secondary);background:var(--surface-1);padding:2px 8px;border-radius:999px">จำเป็น</span><span style="font-size:14px;color:var(--text-secondary);min-width:48px;text-align:right">฿590</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border)"><i class="ti ti-bed" style="color:var(--text-secondary);font-size:18px"></i><span style="flex:1;font-size:14px">ที่นอน 3.5 ฟุต</span><span style="font-size:11px;color:var(--text-secondary);background:var(--surface-1);padding:2px 8px;border-radius:999px">จำเป็น</span><span style="font-size:14px;color:var(--text-secondary);min-width:48px;text-align:right">฿1,890</span></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border)"><i class="ti ti-wind" style="color:var(--text-secondary);font-size:18px"></i><span style="flex:1;font-size:14px">พัดลมตั้งพื้น</span><span style="font-size:11px;color:var(--text-secondary);background:var(--surface-1);padding:2px 8px;border-radius:999px">จำเป็น</span><span style="font-size:14px;color:var(--text-secondary);min-width:48px;text-align:right">฿690</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;padding:11px 18px;border-top:0.5px solid var(--border);font-size:12px;color:var(--text-muted)"><i class="ti ti-building-store"></i> ถ้าซื้อทั้งหมดที่ Shopee = ฿4,860 · Lazada = ฿4,910<i class="ti ti-chevron-right" style="margin-left:auto"></i></div>
+</div></div>
+</section>
+
+<section>
+<h2>5. My Plan — เกินงบ (เลือกเอง)</h2>
+<p class="cap">ผู้ใช้ติ๊กของที่จะเลื่อนเอง · ตัวนับบอกกลับเข้างบหรือยัง</p>
+<div class="frame"><div class="screen">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:0.5px solid var(--border)">
+<span style="font-size:16px;font-weight:500">เลือกของที่จะเลื่อนไปรอบหน้า</span><span style="font-size:13px;color:var(--text-accent);cursor:pointer">ให้ระบบเลือกให้ ↩</span>
+</div>
+<div style="padding:16px 18px 12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;color:var(--text-secondary)">งบของฉัน</span><span style="font-size:14px"><span style="color:var(--text-success);font-weight:500">฿4,870</span> / ฿5,000</span></div>
+<div style="height:10px;border-radius:999px;background:var(--surface-1);overflow:hidden"><div style="width:97%;height:100%;background:var(--text-success);opacity:0.85"></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:var(--bg-success);border-radius:var(--radius)"><i class="ti ti-circle-check" style="color:var(--text-success);font-size:18px"></i><span style="font-size:13px;color:var(--text-success)">กลับเข้างบแล้ว — เลื่อนออก ฿250 · เหลืองบ ฿130</span></div>
+</div>
+<div style="margin:4px 18px 6px;font-size:12px;color:var(--text-secondary)">ของถ้ามีงบ — ติ๊กเพื่อเลื่อนไปรอบหน้า</div>
+<div style="margin:0 18px 14px">
+<div style="display:flex;align-items:center;gap:11px;padding:11px 12px;border:0.5px solid var(--border-accent);background:var(--bg-accent);border-radius:var(--radius);margin-bottom:8px"><i class="ti ti-circle-check" style="color:var(--text-accent);font-size:20px"></i><div style="flex:1"><div style="font-size:14px">ที่ตากผ้าราว</div><div style="font-size:12px;color:var(--text-accent)">จะเลื่อนไปรอบหน้า</div></div><span style="font-size:14px;color:var(--text-secondary)">฿250</span></div>
+<div style="display:flex;align-items:center;gap:11px;padding:11px 12px;border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:8px"><i class="ti ti-circle" style="color:var(--text-muted);font-size:20px"></i><div style="flex:1"><div style="font-size:14px">กล่องข้าว (ชุด 3)</div><div style="font-size:12px;color:var(--text-muted)">priority ต่ำ</div></div><span style="font-size:14px;color:var(--text-secondary)">฿90</span></div>
+<div style="display:flex;align-items:center;gap:11px;padding:11px 12px;border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:8px"><i class="ti ti-circle" style="color:var(--text-muted);font-size:20px"></i><div style="flex:1"><div style="font-size:14px">ผ้าเช็ดตัว 2 ผืน</div><div style="font-size:12px;color:var(--text-muted)">priority กลาง</div></div><span style="font-size:14px;color:var(--text-secondary)">฿180</span></div>
+<div style="display:flex;align-items:center;gap:11px;padding:11px 12px;border:0.5px solid var(--border);border-radius:var(--radius)"><i class="ti ti-circle" style="color:var(--text-muted);font-size:20px"></i><div style="flex:1"><div style="font-size:14px">ที่ชาร์จสำรอง</div><div style="font-size:12px;color:var(--text-muted)">priority ต่ำ</div></div><span style="font-size:14px;color:var(--text-secondary)">฿350</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin:0 18px 14px;padding:10px 12px;background:var(--surface-1);border-radius:var(--radius)"><i class="ti ti-lock" style="color:var(--text-muted);font-size:18px"></i><span style="flex:1;font-size:13px;color:var(--text-secondary)">ของจำเป็น 3 ชิ้น · ฿3,170</span><span style="font-size:12px;color:var(--text-muted)">ล็อกไว้ ติ๊กไม่ได้</span></div>
+<div style="display:flex;gap:8px;padding:0 18px 16px">
+<button style="flex:1;background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);padding:10px;font-size:14px;font-weight:500;cursor:pointer">ยืนยัน เลื่อน 1 ชิ้น</button>
+<button style="background:transparent;color:var(--text-secondary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:10px 14px;font-size:14px;cursor:pointer">ล้างที่เลือก</button>
+</div>
+</div></div>
+</section>
+
+<section>
+<h2>6. My Plan — ของจำเป็นเกินงบเอง (เคสยาก)</h2>
+<p class="cap">ตัด must ไม่ได้ · เสนอ 2 ทาง: เปลี่ยนรุ่นถูกกว่า / แบ่งซื้อข้ามเดือน</p>
+<div class="frame"><div class="screen">
+<div style="padding:16px 18px 12px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;color:var(--text-secondary)">งบของฉัน · ของจำเป็นเท่านั้น</span><span style="font-size:14px"><span style="color:var(--text-danger);font-weight:500">฿3,170</span> / ฿3,000</span></div>
+<div style="height:10px;border-radius:999px;background:var(--surface-1);overflow:hidden"><div style="width:100%;height:100%;background:var(--text-danger);opacity:0.85"></div></div>
+<div style="display:flex;justify-content:flex-end;margin-top:8px"><span style="font-size:12px;color:var(--text-danger);background:var(--bg-danger);padding:2px 10px;border-radius:999px"><i class="ti ti-alert-triangle"></i> เกินงบ ฿170</span></div>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-start;margin:0 18px 16px;padding:11px 13px;background:var(--surface-1);border-radius:var(--radius)">
+<i class="ti ti-heart-handshake" style="color:var(--text-secondary);font-size:20px;margin-top:1px"></i>
+<div><div style="font-size:14px;font-weight:500;margin-bottom:2px">ของจำเป็นล้วน ๆ ก็เกินงบนิดหน่อย</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.5">งบตึงเป็นเรื่องปกติ เราไม่ตัดของจำเป็นให้ — แต่มี 2 ทางช่วย เลือกที่ไหวได้เลย</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin:0 18px 16px">
+<div style="border:0.5px solid var(--border-strong);border-radius:12px;padding:14px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><i class="ti ti-arrows-exchange" style="color:var(--text-primary);font-size:20px"></i><span style="font-size:14px;font-weight:500">เปลี่ยนรุ่นประหยัด</span><span style="font-size:11px;color:var(--text-success);background:var(--bg-success);padding:1px 8px;border-radius:999px">เร็วสุด</span></div>
+<div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px">เปลี่ยนบางชิ้นเป็นรุ่นถูกกว่า คุณภาพใกล้กัน</div>
+<div style="font-size:13px;padding:8px 10px;background:var(--surface-1);border-radius:var(--radius);margin-bottom:10px">ที่นอน 3.5 ฟุต<br><span style="color:var(--text-muted);text-decoration:line-through">฿1,890</span> → ฿1,490 <span style="color:var(--text-success)">ประหยัด ฿400</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text-secondary)">ยอดใหม่</span><span style="font-size:14px;font-weight:500;color:var(--text-success)">฿2,770 · อยู่ในงบ</span></div>
+<button style="width:100%;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:9px;font-size:14px;cursor:pointer">ดูรุ่นถูกกว่า</button>
+</div>
+<div style="border:0.5px solid var(--border-strong);border-radius:12px;padding:14px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><i class="ti ti-calendar-plus" style="color:var(--text-primary);font-size:20px"></i><span style="font-size:14px;font-weight:500">แบ่งซื้อข้ามเดือน</span></div>
+<div style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px">เลื่อนของจำเป็นบางชิ้นไปเดือนหน้า</div>
+<div style="font-size:13px;padding:8px 10px;background:var(--surface-1);border-radius:var(--radius);margin-bottom:10px">พัดลมตั้งพื้น ฿690<br><span style="color:var(--text-secondary)">เดือนนี้ → </span>เดือนหน้า <i class="ti ti-arrow-right" style="font-size:13px"></i></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--text-secondary)">เดือนนี้จ่าย</span><span style="font-size:14px;font-weight:500;color:var(--text-success)">฿2,480 · อยู่ในงบ</span></div>
+<button style="width:100%;background:transparent;color:var(--text-primary);border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:9px;font-size:14px;cursor:pointer">จัดตารางแบ่งซื้อ</button>
+</div>
+</div>
+<div style="padding:11px 18px;border-top:0.5px solid var(--border);font-size:12px;color:var(--text-muted)"><i class="ti ti-info-circle"></i> ไม่อยากปรับตอนนี้ก็ได้ — เก็บแผนไว้เกินงบก่อน แล้วค่อยกลับมาจัดทีหลัง</div>
+</div></div>
+</section>
+
+</div>
+</body>
+</html>
