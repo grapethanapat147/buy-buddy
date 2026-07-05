@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('exposes paired products for a bundle', function () {
     $riceCooker = Product::factory()->create();

@@ -3,8 +3,9 @@
 use App\Enums\ProductTier;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('casts tier to the enum', function () {
     $product = Product::factory()->must()->create();

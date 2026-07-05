@@ -2,8 +2,9 @@
 
 use App\Models\Product;
 use App\Models\ProductPrice;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('returns the lowest platform price as cheapest', function () {
     $product = Product::factory()->create(['ref_price' => 999]);
