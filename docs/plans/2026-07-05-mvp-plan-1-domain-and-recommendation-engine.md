@@ -52,9 +52,8 @@ cd grocery-list-webapp
 - [ ] **Step 2: Install Pest and Pint**
 
 ```bash
-composer remove phpunit/phpunit --dev --no-interaction 2>/dev/null || true
 composer require pestphp/pest pestphp/pest-plugin-laravel --dev --with-all-dependencies --no-interaction
-php artisan pest:install --no-interaction
+./vendor/bin/pest --init
 composer require laravel/pint --dev --no-interaction
 ```
 
@@ -67,12 +66,22 @@ In `phpunit.xml`, ensure these env lines exist inside `<php>`:
 <env name="DB_DATABASE" value=":memory:"/>
 ```
 
-- [ ] **Step 4: Verify the suite runs green**
+- [ ] **Step 4: Boot the Laravel TestCase for both test directories**
+
+Replace the `uses(...)` line in `tests/Pest.php` so model/service tests under `tests/Unit` also get the framework booted (otherwise factories and `app()` fail there):
+
+```php
+uses(Tests\TestCase::class)->in('Feature', 'Unit');
+```
+
+(DB-touching tests additionally declare `uses(RefreshDatabase::class)` per file.)
+
+- [ ] **Step 5: Verify the suite runs green**
 
 Run: `./vendor/bin/pest`
 Expected: PASS (default example test).
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add -A && git commit -m "chore: scaffold Laravel 11 app with Pest and Pint"
@@ -234,20 +243,20 @@ class CategoryFactory extends Factory
 <?php
 
 use App\Models\Category;
-use App\Models\Product;
 
-it('has many products', function () {
-    $category = Category::factory()->create();
-    Product::factory()->count(2)->for($category)->create();
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-    expect($category->products)->toHaveCount(2);
+it('persists a category with a unique slug', function () {
+    $category = Category::factory()->create(['slug' => 'kitchen']);
+
+    expect($category->fresh()->slug)->toBe('kitchen');
 });
 ```
 
-- [ ] **Step 6: Run — expect FAIL (Product factory not ready yet)**
+- [ ] **Step 6: Run — expect PASS**
 
 Run: `./vendor/bin/pest tests/Unit/CategoryTest.php`
-Expected: FAIL. This is resolved by Task 4; leave the test and proceed.
+Expected: PASS. (The Category→Product relationship is verified in Task 4, once the Product factory exists.)
 
 - [ ] **Step 7: Commit**
 
@@ -398,7 +407,10 @@ class ProductFactory extends Factory
 <?php
 
 use App\Enums\ProductTier;
+use App\Models\Category;
 use App\Models\Product;
+
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 it('casts tier to the enum', function () {
     $product = Product::factory()->must()->create();
@@ -411,9 +423,16 @@ it('falls back to ref_price when it has no platform prices', function () {
 
     expect($product->cheapestPrice())->toBe(300);
 });
+
+it('lets a category read back its products', function () {
+    $category = Category::factory()->create();
+    Product::factory()->count(2)->for($category)->create();
+
+    expect($category->products)->toHaveCount(2);
+});
 ```
 
-- [ ] **Step 6: Run tests — expect PASS (and CategoryTest now passes too)**
+- [ ] **Step 6: Run tests — expect PASS**
 
 Run: `./vendor/bin/pest tests/Unit/ProductTest.php tests/Unit/CategoryTest.php`
 Expected: PASS.
@@ -512,6 +531,8 @@ class ProductPriceFactory extends Factory
 use App\Models\Product;
 use App\Models\ProductPrice;
 
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+
 it('returns the lowest platform price as cheapest', function () {
     $product = Product::factory()->create(['ref_price' => 999]);
     ProductPrice::factory()->for($product)->create(['price' => 650]);
@@ -565,6 +586,8 @@ Schema::create('product_pairings', function (Blueprint $table) {
 <?php
 
 use App\Models\Product;
+
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 it('exposes paired products for a bundle', function () {
     $riceCooker = Product::factory()->create();
