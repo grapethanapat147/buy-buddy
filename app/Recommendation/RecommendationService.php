@@ -52,6 +52,46 @@ class RecommendationService
      */
     private function fitToBudget(array $items, int $budget): RecommendationResult
     {
-        return new RecommendationResult(items: $items, budget: $budget, mustExceedsBudget: false);
+        $musts = array_filter($items, fn (RecommendationItem $i) => $i->tier === ProductTier::Must);
+        $rest = array_filter($items, fn (RecommendationItem $i) => $i->tier !== ProductTier::Must);
+
+        $mustTotal = array_sum(array_map(fn (RecommendationItem $i) => $i->lineTotal, $musts));
+
+        $fitted = [];
+        foreach ($musts as $item) {
+            $fitted[] = $this->withStatus($item, 'in_plan');
+        }
+
+        if ($mustTotal > $budget) {
+            foreach ($rest as $item) {
+                $fitted[] = $this->withStatus($item, 'deferred');
+            }
+
+            return new RecommendationResult(items: $fitted, budget: $budget, mustExceedsBudget: true);
+        }
+
+        $running = $mustTotal;
+        foreach ($rest as $item) {
+            if ($running + $item->lineTotal <= $budget) {
+                $running += $item->lineTotal;
+                $fitted[] = $this->withStatus($item, 'in_plan');
+            } else {
+                $fitted[] = $this->withStatus($item, 'deferred');
+            }
+        }
+
+        return new RecommendationResult(items: $fitted, budget: $budget, mustExceedsBudget: false);
+    }
+
+    private function withStatus(RecommendationItem $item, string $status): RecommendationItem
+    {
+        return new RecommendationItem(
+            productId: $item->productId,
+            name: $item->name,
+            tier: $item->tier,
+            quantity: $item->quantity,
+            lineTotal: $item->lineTotal,
+            status: $status,
+        );
     }
 }
