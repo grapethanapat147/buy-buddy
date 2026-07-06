@@ -19,6 +19,6 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        return \App\Filament\Resources\ProductResource::mutateTriggers($data);
+        return ProductResource::mutateTriggers($data);
     }
 }

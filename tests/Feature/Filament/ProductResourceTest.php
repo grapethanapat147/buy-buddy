@@ -5,11 +5,13 @@ use App\Enums\ProductTier;
 use App\Filament\Resources\ProductResource\Pages\CreateProduct;
 use App\Filament\Resources\ProductResource\Pages\ListProducts;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Livewire\livewire;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 beforeEach(fn () => $this->actingAs(User::factory()->create()));
 
@@ -35,6 +37,6 @@ it('creates a product and normalizes an "in" trigger to an array', function () {
         ->call('create')
         ->assertHasNoFormErrors();
 
-    $product = \App\Models\Product::where('slug', 'rice-cooker')->firstOrFail();
+    $product = Product::where('slug', 'rice-cooker')->firstOrFail();
     expect($product->triggers)->toBe([['field' => 'cooking', 'op' => 'in', 'value' => ['sometimes', 'often']]]);
 });
