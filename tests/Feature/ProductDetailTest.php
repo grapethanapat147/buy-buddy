@@ -3,9 +3,10 @@
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('shows the cheapest price and bundle', function () {
     $product = Product::factory()->for(Category::factory())->create(['ref_price' => 999]);

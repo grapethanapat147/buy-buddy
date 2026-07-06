@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Recommendation\RecommendationService;
 use App\Support\PlanSession;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class RecommendationController extends Controller
 {
-    public function index(PlanSession $session, RecommendationService $service): Response|\Illuminate\Http\RedirectResponse
+    public function index(PlanSession $session, RecommendationService $service): Response|RedirectResponse
     {
         $spec = $session->spec();
         if (! $spec) {

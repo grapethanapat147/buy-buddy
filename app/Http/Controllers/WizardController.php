@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSpecRequest;
 use App\Support\PlanSession;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,7 +15,7 @@ class WizardController extends Controller
         return Inertia::render('Wizard');
     }
 
-    public function store(StoreSpecRequest $request, PlanSession $session): \Illuminate\Http\RedirectResponse
+    public function store(StoreSpecRequest $request, PlanSession $session): RedirectResponse
     {
         $session->setSpec([
             'budget' => (int) $request->integer('budget'),
