@@ -37,7 +37,8 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'planCount' => count($request->session()->get('plan_ids', [])),
+            'hasSpec' => $request->session()->has('spec'),
         ];
     }
 }
