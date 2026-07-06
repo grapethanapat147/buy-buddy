@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Recommendation\PlanAdvisor;
 use App\Support\PlanSession;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PlanController extends Controller
 {
@@ -20,5 +23,38 @@ class PlanController extends Controller
         $session->removeFromPlan($product->id);
 
         return back();
+    }
+
+    public function show(PlanSession $session, PlanAdvisor $advisor): Response|RedirectResponse
+    {
+        $spec = $session->spec();
+        if (! $spec) {
+            return redirect()->route('wizard');
+        }
+
+        $products = Product::whereIn('id', $session->planIds())->with('prices')->get();
+
+        $lines = $products->map(fn (Product $p) => [
+            'productId' => $p->id,
+            'name' => $p->name,
+            'tier' => $p->tier,
+            'lineTotal' => $p->cheapestPrice() * ($p->qty_scales_by === 'occupants' ? $spec->occupants : 1),
+        ]);
+
+        $summary = $advisor->summarize($lines->all(), $spec->budget);
+
+        return Inertia::render('MyPlan', [
+            'items' => $lines->map(fn ($l) => [
+                'productId' => $l['productId'],
+                'name' => $l['name'],
+                'tier' => $l['tier']->value,
+                'lineTotal' => $l['lineTotal'],
+                'suggested' => in_array($l['productId'], $summary->suggestedDeferrals, true),
+            ])->values(),
+            'budget' => $spec->budget,
+            'total' => $summary->total,
+            'overBudgetBy' => $summary->overBudgetBy,
+            'mustExceedsBudget' => $summary->mustExceedsBudget,
+        ]);
     }
 }
