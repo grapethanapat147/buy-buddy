@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
+beforeEach(fn () => cache()->flush());
+
 it('logs in and restores the saved plan into the session', function () {
     $user = User::factory()->create(['password' => bcrypt('password123')]);
     $product = Product::factory()->for(Category::factory())->create();
@@ -39,4 +41,14 @@ it('merges the guest plan with the saved plan on login', function () {
     $this->post('/login', ['email' => $user->email, 'password' => 'password123'])->assertRedirect(route('plan.show'));
 
     expect(session('plan_ids'))->toContain($saved->id)->toContain($guest->id);
+});
+
+it('throttles repeated failed login attempts', function () {
+    $user = User::factory()->create(['password' => bcrypt('password123')]);
+
+    foreach (range(1, 6) as $ignored) {
+        $this->post('/login', ['email' => $user->email, 'password' => 'wrong']);
+    }
+
+    $this->post('/login', ['email' => $user->email, 'password' => 'wrong'])->assertStatus(429);
 });

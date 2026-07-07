@@ -19,10 +19,10 @@ Route::get('/plan', [PlanController::class, 'show'])->name('plan.show');
 Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('throttle:6,1');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('throttle:6,1');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::post('/plan/save', [PlanController::class, 'save'])->middleware('auth')->name('plan.save');
