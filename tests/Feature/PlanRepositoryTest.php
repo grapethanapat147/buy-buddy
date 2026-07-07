@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Plan;
 use App\Models\Product;
 use App\Models\User;
 use App\Repositories\PlanRepository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('saves and updates a single plan per user with synced products', function () {
     $user = User::factory()->create();
@@ -17,6 +19,6 @@ it('saves and updates a single plan per user with synced products', function () 
     $repo->save($user, $spec, [$a->id, $b->id]);
     $repo->save($user, $spec, [$a->id]); // update, not duplicate
 
-    expect(\App\Models\Plan::where('user_id', $user->id)->count())->toBe(1);
+    expect(Plan::where('user_id', $user->id)->count())->toBe(1);
     expect($repo->load($user)->products->pluck('id')->all())->toBe([$a->id]);
 });

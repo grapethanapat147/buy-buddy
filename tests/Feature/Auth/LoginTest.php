@@ -4,8 +4,9 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Repositories\PlanRepository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('logs in and restores the saved plan into the session', function () {
     $user = User::factory()->create(['password' => bcrypt('password123')]);

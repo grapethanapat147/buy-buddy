@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Plan;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('registers a guest and saves their session plan without losing it', function () {
     $product = Product::factory()->for(Category::factory())->create();
@@ -18,8 +21,8 @@ it('registers a guest and saves their session plan without losing it', function 
     ])->assertRedirect(route('plan.show'));
 
     $this->assertAuthenticated();
-    $user = \App\Models\User::where('email', 'fah@example.com')->firstOrFail();
-    $plan = \App\Models\Plan::where('user_id', $user->id)->first();
+    $user = User::where('email', 'fah@example.com')->firstOrFail();
+    $plan = Plan::where('user_id', $user->id)->first();
     expect($plan)->not->toBeNull();
     expect($plan->products->pluck('id')->all())->toBe([$product->id]);
     // lossless: session plan still present
