@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProductMode;
 use App\Enums\ProductTier;
 use App\Models\Category;
 use App\Models\Product;
@@ -51,4 +52,13 @@ it('includes a per-store rollup', function () {
 
     $this->get('/plan')->assertInertia(fn (Assert $page) => $page
         ->has('storeRollup', 1, fn (Assert $row) => $row->where('platform', 'Shopee')->where('total', 300)));
+});
+
+it('groups restock items by cadence for the calendar tab', function () {
+    $weekly = Product::factory()->for(Category::factory())->create(['mode' => ProductMode::Restock, 'restock_cadence' => 'weekly', 'ref_price' => 60]);
+    $monthly = Product::factory()->for(Category::factory())->create(['mode' => ProductMode::Restock, 'restock_cadence' => 'monthly', 'ref_price' => 180]);
+    $moveIn = Product::factory()->for(Category::factory())->create(['mode' => ProductMode::MoveIn, 'ref_price' => 500]);
+    planWith([$weekly->id, $monthly->id, $moveIn->id]);
+
+    $this->get('/plan')->assertInertia(fn (Assert $page) => $page->has('restock', 2));
 });

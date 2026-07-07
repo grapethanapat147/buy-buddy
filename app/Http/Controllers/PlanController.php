@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductMode;
 use App\Models\Product;
 use App\Recommendation\PlanAdvisor;
 use App\Recommendation\StoreRollup;
@@ -46,6 +47,19 @@ class PlanController extends Controller
 
         $products = Product::whereIn('id', $session->planIds())->with('prices')->get();
 
+        $restock = $products
+            ->filter(fn (Product $p) => $p->mode === ProductMode::Restock && $p->restock_cadence)
+            ->groupBy('restock_cadence')
+            ->map(fn ($group, $cadence) => [
+                'cadence' => $cadence,
+                'items' => $group->map(fn (Product $p) => [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'price' => $p->cheapestPrice(),
+                ])->values(),
+            ])
+            ->values();
+
         $rollupLines = $products->map(fn (Product $p) => [
             'product' => $p,
             'qty' => $p->qty_scales_by === 'occupants' ? $spec->occupants : 1,
@@ -73,6 +87,7 @@ class PlanController extends Controller
             'overBudgetBy' => $summary->overBudgetBy,
             'mustExceedsBudget' => $summary->mustExceedsBudget,
             'storeRollup' => $rollup->summarize($rollupLines),
+            'restock' => $restock,
         ]);
     }
 }
