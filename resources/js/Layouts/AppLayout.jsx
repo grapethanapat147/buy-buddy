@@ -5,7 +5,7 @@ export default function AppLayout({ children }) {
     return (
         <div className="mx-auto max-w-xl p-4">
             <header className="mb-4 flex items-center justify-between">
-                <Link href="/" className="font-medium">Grocery List</Link>
+                <Link href="/" className="font-medium">BuyBuddy</Link>
                 <nav className="flex gap-4">
                     <Link href="/explore" className="text-sm text-neutral-600">เลือกดูของ</Link>
                     <Link href="/plan" className="text-sm text-neutral-600">กระเป๋า ({planCount ?? 0})</Link>
