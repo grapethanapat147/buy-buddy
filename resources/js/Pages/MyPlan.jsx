@@ -4,7 +4,7 @@ import BudgetMeter from '@/Components/BudgetMeter';
 
 const tierLabel = { must: 'จำเป็น', recommended: 'แนะนำ', optional: 'ถ้ามีงบ' };
 
-export default function MyPlan({ items, budget, total, overBudgetBy, mustExceedsBudget }) {
+export default function MyPlan({ items, budget, total, overBudgetBy, mustExceedsBudget, storeRollup }) {
     const { auth } = usePage().props;
     const over = overBudgetBy > 0;
     return (
@@ -44,6 +44,12 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                 ))}
             </div>
             {items.length === 0 && <p className="py-6 text-center text-sm text-neutral-400">ยังไม่มีของในแผน</p>}
+
+            {storeRollup?.length > 0 && (
+                <div className="mt-4 rounded-lg bg-neutral-50 p-3 text-xs text-neutral-500">
+                    ถ้าซื้อทั้งหมดที่: {storeRollup.map((s) => `${s.platform} ฿${s.total.toLocaleString()}`).join(' · ')}
+                </div>
+            )}
 
             <div className="mt-5 border-t border-neutral-100 pt-4">
                 {auth?.user ? (

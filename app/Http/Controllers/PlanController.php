@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Recommendation\PlanAdvisor;
+use App\Recommendation\StoreRollup;
 use App\Repositories\PlanRepository;
 use App\Support\PlanSession;
 use Illuminate\Http\RedirectResponse;
@@ -36,7 +37,7 @@ class PlanController extends Controller
         return back();
     }
 
-    public function show(PlanSession $session, PlanAdvisor $advisor): Response|RedirectResponse
+    public function show(PlanSession $session, PlanAdvisor $advisor, StoreRollup $rollup): Response|RedirectResponse
     {
         $spec = $session->spec();
         if (! $spec) {
@@ -44,6 +45,11 @@ class PlanController extends Controller
         }
 
         $products = Product::whereIn('id', $session->planIds())->with('prices')->get();
+
+        $rollupLines = $products->map(fn (Product $p) => [
+            'product' => $p,
+            'qty' => $p->qty_scales_by === 'occupants' ? $spec->occupants : 1,
+        ])->all();
 
         $lines = $products->map(fn (Product $p) => [
             'productId' => $p->id,
@@ -66,6 +72,7 @@ class PlanController extends Controller
             'total' => $summary->total,
             'overBudgetBy' => $summary->overBudgetBy,
             'mustExceedsBudget' => $summary->mustExceedsBudget,
+            'storeRollup' => $rollup->summarize($rollupLines),
         ]);
     }
 }
