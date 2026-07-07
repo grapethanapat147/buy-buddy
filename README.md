@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BuyBuddy
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Your buddy for buying what you actually need — within budget.
 
-## About Laravel
+BuyBuddy is a **shopping planner and advisor** (not a store) for people moving into a rented room — new grads and first-jobbers who don't know what to buy, what's worth it, or how to stay inside their budget. It recommends what to get based on your situation, shows the cheapest reference price across stores, suggests the things you'll need alongside each item, and helps you plan one-off move-in buys and recurring restocks. Then it sends you off to a real store to buy. **It helps you decide — it doesn't sell.**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Spec-based recommendations** — answer a short wizard (budget, room, occupants, cooking habits) and get a tailored starter kit, grouped by room area, prioritised by what's essential.
+- **Budget-aware planning** — a persistent budget meter and three honest over-budget states: auto-suggest deferrals, manual trimming, and a "your essentials alone exceed budget" path that never silently cuts must-haves.
+- **Smart Bundle** — "often bought with" chains (rice cooker → rice → storage box).
+- **Price comparison** — cheapest curated reference price per item, plus a "buy everything at this store" per-platform rollup.
+- **Move-in & Restock modes** — one-off setup vs. recurring buys, with a calendar view that groups restocks by weekly/monthly cadence.
+- **Explore** — browse the whole catalog by category or search for people who already know what they want.
+- **Guest-first accounts** — build a plan without signing up; register or log in to save it, and your in-progress plan is never lost (it merges, not overwrites).
+- **Admin** — a Filament panel to curate the catalog, prices, bundles, and recommendation trigger rules.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech stack
 
-## Learning Laravel
+- **Backend:** Laravel 11 (PHP 8.3)
+- **Admin:** Filament 3
+- **Frontend:** Inertia.js v3 + React 19, Vite, Tailwind CSS 3
+- **Tests:** Pest 3
+- **Database:** SQLite (dev) — swap for MySQL/Postgres in production
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Getting started
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone git@github.com:grapethanapat147/buy-buddy.git
+cd buy-buddy
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+composer install
+npm install
 
-## Laravel Sponsors
+cp .env.example .env
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# SQLite (default): create the file, then migrate + seed a demo catalog
+touch database/database.sqlite
+php artisan migrate --seed
 
-### Premium Partners
+npm run build   # or: npm run dev  (for HMR during development)
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Visit the served URL (or `buy-buddy.test` under Laravel Herd).
 
-## Contributing
+**Admin panel:** `/admin` — seeded login `admin@grocery.test` / `password` (admin access is gated by the `is_admin` flag; regular registered users get a 403).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Testing
 
-## Code of Conduct
+```bash
+./vendor/bin/pest          # full suite
+./vendor/bin/pint          # code style
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Project structure
 
-## Security Vulnerabilities
+```
+app/
+  Recommendation/     Pure domain logic — Spec, TriggerEvaluator,
+                      RecommendationService (budget-fit), PlanAdvisor, StoreRollup
+  Models/             Category, Product, ProductPrice, Plan, User
+  Filament/           Admin resources (Category, Product + prices/pairings)
+  Http/Controllers/   Wizard, Recommendation, Product, Plan, Explore, Auth
+resources/js/
+  Pages/              Inertia React pages (Wizard, Recommendations,
+                      ProductDetail, MyPlan, Explore, Auth)
+  Layouts/ Components/
+docs/
+  *-design.md               Product/UX design spec
+  recommendation-logic*.md  Rule-based engine + success metrics
+  wireframes/index.html     Standalone wireframes (open in a browser)
+  plans/                    TDD implementation plans (Plans 1–6)
+.claude/skills/       Project design skills (taste, motion, tailwind, a11y)
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Design direction
 
-## License
+BuyBuddy leans **warm, friendly, and trustworthy** — a helpful buddy, not a cold utility. Design work should reach for delight (motion, micro-interactions, playful-but-clear copy) while keeping money and budget states legible and reassuring. See `.claude/skills/` for the design taste, motion, Tailwind pattern, and accessibility guides.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Roadmap
+
+- Restock reminder notifications
+- Password reset & email verification
+- Empty / error / legal pages
+- Internationalisation (TH/EN)
+- Basket optimiser that factors in shipping and free-shipping thresholds
+- Live price integrations (affiliate APIs) beyond curated reference prices
+
+## Status
+
+MVP — a working full-stack app (recommendation engine, admin, frontend, auth) with a green test suite. Built plan-by-plan; see `docs/plans/`.
+
+---
+
+_BuyBuddy is an advisor. It recommends and plans; the actual purchase happens on the store you choose. Store rankings are by genuine value, and outbound links may be affiliate links._
