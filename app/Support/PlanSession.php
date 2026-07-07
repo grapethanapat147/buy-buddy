@@ -36,11 +36,27 @@ class PlanSession
     }
 
     /**
+     * @return array<string, mixed>|null
+     */
+    public function specArray(): ?array
+    {
+        return $this->request->session()->get('spec');
+    }
+
+    /**
      * @return array<int>
      */
     public function planIds(): array
     {
         return $this->request->session()->get('plan_ids', []);
+    }
+
+    /**
+     * @param  array<int>  $ids
+     */
+    public function setPlanIds(array $ids): void
+    {
+        $this->request->session()->put('plan_ids', array_values(array_unique($ids)));
     }
 
     public function addToPlan(int $productId): void
