@@ -1,10 +1,11 @@
-import { router } from '@inertiajs/react';
+import { router, usePage, Link } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 import BudgetMeter from '@/Components/BudgetMeter';
 
 const tierLabel = { must: 'จำเป็น', recommended: 'แนะนำ', optional: 'ถ้ามีงบ' };
 
 export default function MyPlan({ items, budget, total, overBudgetBy, mustExceedsBudget }) {
+    const { auth } = usePage().props;
     const over = overBudgetBy > 0;
     return (
         <AppLayout>
@@ -43,6 +44,19 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                 ))}
             </div>
             {items.length === 0 && <p className="py-6 text-center text-sm text-neutral-400">ยังไม่มีของในแผน</p>}
+
+            <div className="mt-5 border-t border-neutral-100 pt-4">
+                {auth?.user ? (
+                    <button onClick={() => router.post('/plan/save', {}, { preserveScroll: true })}
+                        className="w-full rounded-lg bg-neutral-800 p-3 font-medium text-white">
+                        เซฟแผนไว้ในบัญชี ({auth.user.name})
+                    </button>
+                ) : (
+                    <Link href="/register" className="block rounded-lg bg-neutral-800 p-3 text-center font-medium text-white">
+                        เซฟแผน (สมัคร/เข้าสู่ระบบ)
+                    </Link>
+                )}
+            </div>
         </AppLayout>
     );
 }

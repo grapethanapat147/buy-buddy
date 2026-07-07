@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Recommendation\PlanAdvisor;
+use App\Repositories\PlanRepository;
 use App\Support\PlanSession;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -21,6 +22,16 @@ class PlanController extends Controller
     public function remove(Product $product, PlanSession $session): RedirectResponse
     {
         $session->removeFromPlan($product->id);
+
+        return back();
+    }
+
+    public function save(PlanSession $session, PlanRepository $plans): RedirectResponse
+    {
+        $spec = $session->specArray();
+        abort_if($spec === null, 400);
+
+        $plans->save(request()->user(), $spec, $session->planIds());
 
         return back();
     }
