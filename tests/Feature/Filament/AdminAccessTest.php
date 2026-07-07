@@ -1,14 +1,15 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
+uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-it('lets an authenticated user reach the admin panel', function () {
-    $user = User::factory()->create();
+it('lets an admin reach the admin panel', function () {
+    $this->actingAs(User::factory()->admin()->create())->get('/admin')->assertSuccessful();
+});
 
-    $this->actingAs($user)->get('/admin')->assertSuccessful();
+it('forbids a non-admin from the admin panel', function () {
+    $this->actingAs(User::factory()->create())->get('/admin')->assertForbidden();
 });
 
 it('redirects guests away from the admin panel', function () {

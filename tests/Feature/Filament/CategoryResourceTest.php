@@ -9,7 +9,7 @@ use function Pest\Livewire\livewire;
 
 uses(RefreshDatabase::class);
 
-beforeEach(fn () => $this->actingAs(User::factory()->create()));
+beforeEach(fn () => $this->actingAs(User::factory()->admin()->create()));
 
 it('lists categories', function () {
     livewire(ListCategories::class)->assertOk();

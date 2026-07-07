@@ -12,7 +12,7 @@ use function Pest\Livewire\livewire;
 uses(RefreshDatabase::class);
 
 it('adds a platform price to a product', function () {
-    $this->actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->admin()->create());
     $product = Product::factory()->for(Category::factory())->create();
 
     livewire(ProductPricesRelationManager::class, [
