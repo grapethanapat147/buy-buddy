@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "grocery",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd /Users/grapetnp/Herd/grocery-list-webapp && exec php artisan serve --port=8023"],
+      "port": 8023
+    }
+  ]
+}
