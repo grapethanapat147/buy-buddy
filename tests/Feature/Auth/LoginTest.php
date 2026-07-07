@@ -27,3 +27,16 @@ it('rejects bad credentials', function () {
     $this->post('/login', ['email' => $user->email, 'password' => 'wrong'])
         ->assertSessionHasErrors('email');
 });
+
+it('merges the guest plan with the saved plan on login', function () {
+    $user = User::factory()->create(['password' => bcrypt('password123')]);
+    $saved = Product::factory()->for(Category::factory())->create();
+    $guest = Product::factory()->for(Category::factory())->create();
+    (new PlanRepository)->save($user, ['budget' => 5000, 'room_type' => 'studio', 'occupants' => 1, 'cooking' => 'sometimes', 'owned_product_ids' => []], [$saved->id]);
+
+    session(['plan_ids' => [$guest->id]]);
+
+    $this->post('/login', ['email' => $user->email, 'password' => 'password123'])->assertRedirect(route('plan.show'));
+
+    expect(session('plan_ids'))->toContain($saved->id)->toContain($guest->id);
+});

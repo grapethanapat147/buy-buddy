@@ -29,8 +29,13 @@ class AuthenticatedSessionController extends Controller
 
         $plan = $plans->load(Auth::user());
         if ($plan) {
-            $request->session()->put('spec', $plan->spec);
-            $request->session()->put('plan_ids', $plan->products->pluck('id')->all());
+            $guestIds = $request->session()->get('plan_ids', []);
+            $mergedIds = array_values(array_unique([...$plan->products->pluck('id')->all(), ...$guestIds]));
+
+            $request->session()->put('plan_ids', $mergedIds);
+            if (! $request->session()->has('spec')) {
+                $request->session()->put('spec', $plan->spec);
+            }
         }
 
         return redirect()->route('plan.show');
