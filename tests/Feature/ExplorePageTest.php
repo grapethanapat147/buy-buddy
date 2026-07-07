@@ -2,9 +2,10 @@
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('lists all products by default', function () {
     Product::factory()->for(Category::factory())->count(3)->create();

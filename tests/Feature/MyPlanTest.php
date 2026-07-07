@@ -3,6 +3,7 @@
 use App\Enums\ProductTier;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductPrice;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -45,7 +46,7 @@ it('flags must-exceeds-budget', function () {
 
 it('includes a per-store rollup', function () {
     $product = Product::factory()->for(Category::factory())->create(['ref_price' => 300]);
-    \App\Models\ProductPrice::factory()->for($product)->create(['platform' => 'Shopee', 'price' => 300]);
+    ProductPrice::factory()->for($product)->create(['platform' => 'Shopee', 'price' => 300]);
     planWith([$product->id]);
 
     $this->get('/plan')->assertInertia(fn (Assert $page) => $page

@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('lets an admin reach the admin panel', function () {
     $this->actingAs(User::factory()->admin()->create())->get('/admin')->assertSuccessful();

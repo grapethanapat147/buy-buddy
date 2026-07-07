@@ -4,8 +4,9 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Recommendation\StoreRollup;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
+uses(RefreshDatabase::class);
 
 it('totals each platform, falling back to cheapest where a store lacks the item', function () {
     $a = Product::factory()->for(Category::factory())->create(['ref_price' => 100]);
