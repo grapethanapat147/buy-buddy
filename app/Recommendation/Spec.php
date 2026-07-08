@@ -13,6 +13,9 @@ readonly class Spec
         public int $occupants,
         public string $cooking,
         public array $ownedProductIds = [],
+        public string $laundry = 'own_machine',
+        public string $workStyle = 'office',
+        public string $spendingStyle = 'balanced',
     ) {}
 
     public function owns(int $productId): bool
@@ -27,6 +30,9 @@ readonly class Spec
             'room_type' => $this->roomType,
             'occupants' => $this->occupants,
             'cooking' => $this->cooking,
+            'laundry' => $this->laundry,
+            'work_style' => $this->workStyle,
+            'spending_style' => $this->spendingStyle,
         };
     }
 }

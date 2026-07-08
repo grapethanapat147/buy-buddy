@@ -21,6 +21,9 @@ class StoreSpecRequest extends FormRequest
             'room_type' => ['required', 'string'],
             'occupants' => ['required', 'integer', 'min:1'],
             'cooking' => ['required', 'in:never,sometimes,often'],
+            'laundry' => ['required', 'in:own_machine,hand,service'],
+            'work_style' => ['required', 'in:home,office,hybrid'],
+            'spending_style' => ['required', 'in:essentials,balanced,comfort'],
         ];
     }
 }

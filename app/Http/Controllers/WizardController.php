@@ -23,6 +23,9 @@ class WizardController extends Controller
             'occupants' => (int) $request->integer('occupants'),
             'cooking' => $request->string('cooking')->toString(),
             'owned_product_ids' => [],
+            'laundry' => $request->string('laundry')->toString(),
+            'work_style' => $request->string('work_style')->toString(),
+            'spending_style' => $request->string('spending_style')->toString(),
         ]);
 
         return redirect()->route('recommendations');

@@ -65,6 +65,14 @@ class StudioStarterSeeder extends Seeder
         $this->product($pantry, 'cooking-oil', 'น้ำมันพืช', ProductTier::Recommended, 60, $cooks, ProductMode::Restock, 'monthly');
         $this->product($pantry, 'seasoning-set', 'เครื่องปรุงชุดเริ่มต้น', ProductTier::Optional, 150, $cooks);
         $this->product($pantry, 'instant-noodles', 'บะหมี่กึ่งสำเร็จรูป (แพ็ค)', ProductTier::Optional, 90, [], ProductMode::Restock, 'weekly');
+
+        $work = Category::create(['name' => 'ทำงาน', 'slug' => 'work', 'sort_order' => 6]);
+        $this->product($work, 'desk-lamp', 'โคมไฟตั้งโต๊ะ', ProductTier::Recommended, 290, [
+            ['field' => 'work_style', 'op' => 'in', 'value' => ['home', 'hybrid']],
+        ]);
+        $this->product($work, 'laundry-rack', 'ราวตากผ้าในห้อง', ProductTier::Recommended, 350, [
+            ['field' => 'laundry', 'op' => 'in', 'value' => ['hand', 'service']],
+        ]);
     }
 
     /**

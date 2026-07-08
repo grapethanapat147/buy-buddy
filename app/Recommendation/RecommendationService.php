@@ -30,7 +30,8 @@ class RecommendationService
         return Product::with('prices')
             ->get()
             ->reject(fn (Product $p) => $spec->owns($p->id))
-            ->filter(fn (Product $p) => $this->triggers->passes($p->triggers ?? [], $spec));
+            ->filter(fn (Product $p) => $this->triggers->passes($p->triggers ?? [], $spec))
+            ->reject(fn (Product $p) => $spec->spendingStyle === 'essentials' && $p->tier === ProductTier::Optional);
     }
 
     private function toItem(Product $product, Spec $spec): RecommendationItem

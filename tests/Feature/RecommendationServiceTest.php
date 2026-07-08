@@ -53,3 +53,13 @@ it('orders must-have items before optional ones', function () {
 
     expect($result->items[0]->productId)->toBe($must->id);
 });
+
+it('hides optional items for essentials spenders but shows them for comfort spenders', function () {
+    $optional = makeProduct(['tier' => ProductTier::Optional, 'triggers' => []]);
+
+    $essentials = new Spec(budget: 5000, roomType: 'studio', occupants: 1, cooking: 'sometimes', spendingStyle: 'essentials');
+    $comfort = new Spec(budget: 5000, roomType: 'studio', occupants: 1, cooking: 'sometimes', spendingStyle: 'comfort');
+
+    expect(collect(app(RecommendationService::class)->recommend($essentials)->items)->pluck('productId'))->not->toContain($optional->id)
+        ->and(collect(app(RecommendationService::class)->recommend($comfort)->items)->pluck('productId'))->toContain($optional->id);
+});

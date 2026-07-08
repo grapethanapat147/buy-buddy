@@ -24,6 +24,9 @@ class PlanSession
             occupants: $data['occupants'],
             cooking: $data['cooking'],
             ownedProductIds: $data['owned_product_ids'] ?? [],
+            laundry: $data['laundry'] ?? 'own_machine',
+            workStyle: $data['work_style'] ?? 'office',
+            spendingStyle: $data['spending_style'] ?? 'balanced',
         ) : null;
     }
 
