@@ -3,13 +3,15 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\WizardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [WizardController::class, 'show'])->name('wizard');
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/wizard', [WizardController::class, 'show'])->name('wizard');
 Route::post('/wizard', [WizardController::class, 'store'])->name('wizard.store');
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
