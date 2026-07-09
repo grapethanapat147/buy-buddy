@@ -1,5 +1,6 @@
 import { Link, router } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
+import IconTile from '@/Components/IconTile';
 
 export default function Explore({ categories, activeCategory, query, products }) {
     const go = (params) => router.get('/explore', params, { preserveState: true, preserveScroll: true });
@@ -27,7 +28,8 @@ export default function Explore({ categories, activeCategory, query, products })
             <div className="mt-4 space-y-2">
                 {products.map((p) => (
                     <div key={p.id} className="flex items-center gap-3 rounded-xl border border-ink/8 bg-cream-card p-3 shadow-soft transition hover:-translate-y-0.5 hover:shadow-lift">
-                        <div className="flex-1">
+                        <IconTile icon={p.icon} />
+                        <div className="min-w-0 flex-1">
                             <Link href={`/products/${p.id}`} className="text-sm font-semibold text-ink transition-colors hover:text-brand">{p.name}</Link>
                             <div className="text-xs text-ink-soft tabular-nums">{p.category} · ฿{p.price.toLocaleString()}</div>
                         </div>

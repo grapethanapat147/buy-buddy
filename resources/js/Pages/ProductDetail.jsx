@@ -1,11 +1,15 @@
 import { router } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
+import IconTile from '@/Components/IconTile';
 
 export default function ProductDetail({ product, bundle }) {
     const bundleTotal = bundle.reduce((s, b) => s + b.price, 0);
     return (
         <AppLayout>
-            <h1 className="text-2xl font-semibold text-ink">{product.name}</h1>
+            <div className="flex items-center gap-3">
+                <IconTile icon={product.icon} size="lg" />
+                <h1 className="text-2xl font-semibold text-ink">{product.name}</h1>
+            </div>
             <div className="mt-3 rounded-xl border border-ink/10 bg-cream-card shadow-soft">
                 <div className="flex items-center justify-between p-3">
                     <span className="text-sm text-ink-soft">เทียบราคา</span>
@@ -27,8 +31,9 @@ export default function ProductDetail({ product, bundle }) {
                     <p className="mt-4 text-sm font-semibold text-ink">มักซื้อคู่กับ</p>
                     <div className="mt-2 rounded-xl border border-ink/8 bg-cream-card shadow-soft">
                         {bundle.map((b) => (
-                            <div key={b.id} className="flex items-center justify-between border-b border-ink/5 p-3 last:border-0">
-                                <span className="text-sm text-ink">{b.name}</span>
+                            <div key={b.id} className="flex items-center gap-2 border-b border-ink/5 p-3 last:border-0">
+                                <span className="text-lg" aria-hidden="true">{b.icon}</span>
+                                <span className="flex-1 text-sm text-ink">{b.name}</span>
                                 <span className="text-sm text-ink-soft tabular-nums">฿{b.price.toLocaleString()}</span>
                             </div>
                         ))}

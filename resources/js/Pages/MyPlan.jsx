@@ -75,6 +75,7 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                                     transition={{ duration: 0.22, ease: EASE }}
                                     className={`flex items-center gap-3 border-b border-ink/5 py-3 ${it.suggested ? 'rounded-xl bg-amber-50 px-3' : ''}`}
                                 >
+                                    <span className="shrink-0 text-lg" aria-hidden="true">{it.icon}</span>
                                     <div className="min-w-0 flex-1">
                                         <div className="truncate text-sm text-ink">{it.name}</div>
                                         <div className="text-xs text-ink-muted">{tierLabel[it.tier]}</div>
@@ -110,8 +111,9 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                             <div className="mb-2 text-sm font-semibold text-ink">{cadenceLabel[group.cadence] ?? group.cadence}</div>
                             <div className="divide-y divide-ink/5 rounded-xl border border-ink/8">
                                 {group.items.map((it) => (
-                                    <div key={it.id} className="flex items-center justify-between p-3">
-                                        <span className="text-sm text-ink">{it.name}</span>
+                                    <div key={it.id} className="flex items-center gap-2 p-3">
+                                        <span className="text-lg" aria-hidden="true">{it.icon}</span>
+                                        <span className="flex-1 text-sm text-ink">{it.name}</span>
                                         <span className="text-sm text-ink-soft tabular-nums">฿{it.price.toLocaleString()}</span>
                                     </div>
                                 ))}

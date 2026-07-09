@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
+import Mascot from '@/Components/Mascot';
 
 const perks = [['🎯', 'แนะนำตามคุณ'], ['💸', 'คุ้มทุกบาท'], ['📅', 'วางแผนซื้อซ้ำ']];
 
@@ -7,7 +8,7 @@ export default function Landing() {
     return (
         <AppLayout>
             <div className="py-6 text-center">
-                <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-brand-50 text-6xl" aria-hidden="true">🛍️</div>
+                <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-brand-50"><Mascot mood="happy" className="text-6xl" /></div>
                 <h1 className="text-3xl font-bold leading-tight text-ink">จัดของเข้าห้อง<br />ง่าย ๆ ตามงบ</h1>
                 <p className="mx-auto mt-3 max-w-sm text-lg text-ink-soft">BuyBuddy ช่วยแนะนำว่าต้องซื้ออะไร คุ้มสุดที่ร้านไหน และวางแผนไม่ให้เกินงบ</p>
                 <div className="mt-8 space-y-3">
