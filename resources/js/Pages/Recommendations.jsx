@@ -1,8 +1,12 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link, router } from '@inertiajs/react';
+import { motion, AnimatePresence } from 'motion/react';
 import AppLayout from '@/Layouts/AppLayout';
 import BudgetMeter from '@/Components/BudgetMeter';
 import ReadinessMeter from '@/Components/ReadinessMeter';
 import IconTile from '@/Components/IconTile';
+import Mascot from '@/Components/Mascot';
+import { celebrate } from '@/lib/celebrate';
 
 const tierBadge = {
     must: 'bg-rose-50 text-rose-700',
@@ -12,6 +16,37 @@ const tierBadge = {
 const tierLabel = { must: 'จำเป็น', recommended: 'แนะนำ', optional: 'ถ้ามีงบ' };
 
 export default function Recommendations({ categories, budget, plannedTotal, readiness }) {
+    const [toast, setToast] = useState(null);
+    const prev = useRef(null);
+
+    useEffect(() => {
+        const doneNow = {};
+        categories.forEach((c) => {
+            doneNow[c.name] = c.total > 0 && c.collected === c.total;
+        });
+
+        if (prev.current) {
+            const justReady = readiness.percent >= 100 && prev.current.percent < 100;
+            const newlyDone = categories.find((c) => doneNow[c.name] && !prev.current.done[c.name]);
+
+            if (justReady) {
+                celebrate();
+                setToast('ห้องพร้อมอยู่แล้ว! เยี่ยมไปเลย 🎉');
+            } else if (newlyDone) {
+                celebrate();
+                setToast(`${newlyDone.name}ครบแล้ว! 🎉`);
+            }
+        }
+
+        prev.current = { done: doneNow, percent: readiness.percent };
+    }, [categories, readiness.percent]);
+
+    useEffect(() => {
+        if (!toast) return;
+        const t = setTimeout(() => setToast(null), 2400);
+        return () => clearTimeout(t);
+    }, [toast]);
+
     return (
         <AppLayout>
             <h1 className="text-2xl font-semibold text-ink">จัดห้องกันเลย</h1>
@@ -70,6 +105,24 @@ export default function Recommendations({ categories, budget, plannedTotal, read
             <Link href="/plan" className="mt-6 block rounded-full bg-brand p-4 text-center text-lg font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]">
                 ดูแผนของฉัน
             </Link>
+
+            <AnimatePresence>
+                {toast && (
+                    <motion.div
+                        key="celebrate-toast"
+                        initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 16, scale: 0.96 }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                        className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4"
+                    >
+                        <div className="flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-cream shadow-lift">
+                            <Mascot mood="celebrate" className="text-lg" />
+                            <span>{toast}</span>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </AppLayout>
     );
 }

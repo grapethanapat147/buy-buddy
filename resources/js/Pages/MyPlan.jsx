@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { router, usePage, Link } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'motion/react';
 import AppLayout from '@/Layouts/AppLayout';
 import BudgetMeter from '@/Components/BudgetMeter';
+import { celebrate } from '@/lib/celebrate';
 
 const EASE = [0.22, 1, 0.36, 1];
 const tierLabel = { must: 'จำเป็น', recommended: 'แนะนำ', optional: 'ถ้ามีงบ' };
@@ -25,6 +26,14 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
     const { auth } = usePage().props;
     const [tab, setTab] = useState('list');
     const over = overBudgetBy > 0;
+
+    const prevOver = useRef(overBudgetBy);
+    useEffect(() => {
+        if (prevOver.current > 0 && overBudgetBy === 0) {
+            celebrate();
+        }
+        prevOver.current = overBudgetBy;
+    }, [overBudgetBy]);
 
     return (
         <AppLayout>
@@ -94,7 +103,7 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                         </AnimatePresence>
                     </div>
 
-                    {items.length === 0 && <p className="py-8 text-center text-sm text-ink-muted">ยังไม่มีของในแผน</p>}
+                    {items.length === 0 && <p className="py-8 text-center text-sm text-ink-muted">ยังไม่มีของ เริ่มเก็บกันเลย!</p>}
 
                     {storeRollup?.length > 0 && (
                         <div className="mt-4 rounded-xl bg-cream-sunk p-3 text-xs text-ink-soft">
