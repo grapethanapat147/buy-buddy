@@ -32,6 +32,7 @@ class ExploreController extends Controller
             'products' => $products->map(fn (Product $p) => [
                 'id' => $p->id,
                 'name' => $p->name,
+                'icon' => $p->icon,
                 'category' => $p->category->name,
                 'price' => $p->cheapestPrice(),
                 'inPlan' => in_array($p->id, $planIds, true),

@@ -18,12 +18,13 @@ class ProductController extends Controller
             'product' => [
                 'id' => $product->id,
                 'name' => $product->name,
+                'icon' => $product->icon,
                 'tier' => $product->tier->value,
                 'cheapest' => $cheapest ? ['platform' => $cheapest->platform, 'price' => $cheapest->price] : ['platform' => null, 'price' => $product->cheapestPrice()],
                 'otherStoreCount' => max(0, $product->prices->count() - 1),
             ],
             'bundle' => $product->pairedProducts->map(fn (Product $p) => [
-                'id' => $p->id, 'name' => $p->name, 'price' => $p->cheapestPrice(),
+                'id' => $p->id, 'name' => $p->name, 'icon' => $p->icon, 'price' => $p->cheapestPrice(),
             ])->values(),
         ]);
     }

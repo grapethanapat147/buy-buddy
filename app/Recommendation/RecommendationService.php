@@ -27,7 +27,7 @@ class RecommendationService
      */
     private function eligible(Spec $spec): Collection
     {
-        return Product::with('prices')
+        return Product::with(['prices', 'category'])
             ->get()
             ->reject(fn (Product $p) => $spec->owns($p->id))
             ->filter(fn (Product $p) => $this->triggers->passes($p->triggers ?? [], $spec))
@@ -45,6 +45,8 @@ class RecommendationService
             quantity: $quantity,
             lineTotal: $product->cheapestPrice() * $quantity,
             status: 'in_plan',
+            icon: $product->icon,
+            category: $product->category->name,
         );
     }
 
@@ -93,6 +95,8 @@ class RecommendationService
             quantity: $item->quantity,
             lineTotal: $item->lineTotal,
             status: $status,
+            icon: $item->icon,
+            category: $item->category,
         );
     }
 }

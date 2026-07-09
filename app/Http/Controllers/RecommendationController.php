@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductTier;
 use App\Recommendation\RecommendationService;
 use App\Support\PlanSession;
 use Illuminate\Http\RedirectResponse;
@@ -19,19 +20,39 @@ class RecommendationController extends Controller
 
         $result = $service->recommend($spec);
         $planIds = $session->planIds();
+        $items = collect($result->items);
 
-        $items = collect($result->inPlan())->map(fn ($i) => [
-            'productId' => $i->productId,
-            'name' => $i->name,
-            'tier' => $i->tier->value,
-            'lineTotal' => $i->lineTotal,
-            'inPlan' => in_array($i->productId, $planIds, true),
-        ])->values();
+        $categories = $items->groupBy('category')->map(function ($group, $name) use ($planIds) {
+            $rows = $group->map(fn ($i) => [
+                'productId' => $i->productId,
+                'name' => $i->name,
+                'icon' => $i->icon,
+                'tier' => $i->tier->value,
+                'lineTotal' => $i->lineTotal,
+                'inPlan' => in_array($i->productId, $planIds, true),
+            ])->values();
+
+            return [
+                'name' => $name,
+                'total' => $rows->count(),
+                'collected' => $rows->where('inPlan', true)->count(),
+                'items' => $rows,
+            ];
+        })->values();
+
+        $musts = $items->where('tier', ProductTier::Must);
+        $mustsInPlan = $musts->filter(fn ($i) => in_array($i->productId, $planIds, true))->count();
+        $readiness = [
+            'collected' => $mustsInPlan,
+            'total' => $musts->count(),
+            'percent' => $musts->count() ? (int) round($mustsInPlan / $musts->count() * 100) : 0,
+        ];
 
         return Inertia::render('Recommendations', [
-            'items' => $items,
+            'categories' => $categories,
             'budget' => $spec->budget,
             'plannedTotal' => $result->plannedTotal(),
+            'readiness' => $readiness,
         ]);
     }
 }

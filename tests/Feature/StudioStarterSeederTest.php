@@ -14,4 +14,6 @@ it('seeds a starter catalog with a rice cooker bundle', function () {
     expect(Product::count())->toBeGreaterThanOrEqual(6)
         ->and($riceCooker->pairedProducts)->not->toBeEmpty()
         ->and($riceCooker->prices)->not->toBeEmpty();
+
+    expect(Product::where('slug', 'rice-cooker')->value('icon'))->toBe('🍚');
 });

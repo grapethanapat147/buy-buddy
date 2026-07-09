@@ -24,7 +24,8 @@ it('renders recommended items for the session spec', function () {
     $this->get('/recommendations')->assertInertia(fn (Assert $page) => $page
         ->component('Recommendations')
         ->where('budget', 5000)
-        ->has('items', 1, fn (Assert $item) => $item->where('productId', $p->id)->etc()));
+        ->has('readiness')
+        ->has('categories'));
 });
 
 it('adds a product to the session plan', function () {

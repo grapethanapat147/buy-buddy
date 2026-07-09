@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'restock_cadence' => null,
             'qty_scales_by' => null,
             'triggers' => [],
+            'icon' => '📦',
         ];
     }
 

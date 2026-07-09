@@ -13,5 +13,7 @@ readonly class RecommendationItem
         public int $quantity,
         public int $lineTotal,
         public string $status,
+        public string $icon = '📦',
+        public string $category = '',
     ) {}
 }

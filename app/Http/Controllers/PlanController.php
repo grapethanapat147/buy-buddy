@@ -55,6 +55,7 @@ class PlanController extends Controller
                 'items' => $group->map(fn (Product $p) => [
                     'id' => $p->id,
                     'name' => $p->name,
+                    'icon' => $p->icon,
                     'price' => $p->cheapestPrice(),
                 ])->values(),
             ])
@@ -68,6 +69,7 @@ class PlanController extends Controller
         $lines = $products->map(fn (Product $p) => [
             'productId' => $p->id,
             'name' => $p->name,
+            'icon' => $p->icon,
             'tier' => $p->tier,
             'lineTotal' => $p->cheapestPrice() * ($p->qty_scales_by === 'occupants' ? $spec->occupants : 1),
         ]);
@@ -78,6 +80,7 @@ class PlanController extends Controller
             'items' => $lines->map(fn ($l) => [
                 'productId' => $l['productId'],
                 'name' => $l['name'],
+                'icon' => $l['icon'],
                 'tier' => $l['tier']->value,
                 'lineTotal' => $l['lineTotal'],
                 'suggested' => in_array($l['productId'], $summary->suggestedDeferrals, true),
