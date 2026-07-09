@@ -12,7 +12,7 @@ const tierLabel = { must: 'จำเป็น', recommended: 'แนะนำ', 
 export default function Recommendations({ items, budget, plannedTotal }) {
     return (
         <AppLayout>
-            <h1 className="text-lg font-semibold text-ink">ชุดของแนะนำ</h1>
+            <h1 className="text-2xl font-semibold text-ink">ชุดของแนะนำ</h1>
             <div className="my-3"><BudgetMeter total={plannedTotal} budget={budget} /></div>
             <div className="space-y-2">
                 {items.map((it) => (
@@ -36,7 +36,7 @@ export default function Recommendations({ items, budget, plannedTotal }) {
                     </div>
                 ))}
             </div>
-            <Link href="/plan" className="mt-4 block rounded-full bg-brand p-3 text-center font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]">
+            <Link href="/plan" className="mt-4 block rounded-full bg-brand p-4 text-center text-lg font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]">
                 ดูแผนของฉัน
             </Link>
         </AppLayout>

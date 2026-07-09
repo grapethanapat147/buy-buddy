@@ -28,7 +28,7 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
 
     return (
         <AppLayout>
-            <h1 className="text-lg font-semibold text-ink">แผนของฉัน</h1>
+            <h1 className="text-2xl font-semibold text-ink">แผนของฉัน</h1>
 
             <div className="mt-3 flex gap-5 border-b border-ink/10">
                 <Tab active={tab === 'list'} onClick={() => setTab('list')}>รายการ</Tab>
@@ -125,14 +125,14 @@ export default function MyPlan({ items, budget, total, overBudgetBy, mustExceeds
                 {auth?.user ? (
                     <button
                         onClick={() => router.post('/plan/save', {}, { preserveScroll: true })}
-                        className="w-full rounded-full bg-brand p-3 font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]"
+                        className="w-full rounded-full bg-brand p-4 text-lg font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]"
                     >
                         เซฟแผนไว้ในบัญชี ({auth.user.name})
                     </button>
                 ) : (
                     <Link
                         href="/register"
-                        className="block rounded-full bg-brand p-3 text-center font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]"
+                        className="block rounded-full bg-brand p-4 text-center text-lg font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98]"
                     >
                         เซฟแผน (สมัคร/เข้าสู่ระบบ)
                     </Link>

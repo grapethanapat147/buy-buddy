@@ -6,7 +6,7 @@ export default function AppLayout({ children }) {
     return (
         <div className="mx-auto max-w-xl px-4 pb-10 pt-5">
             <header className="mb-4 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-1.5 text-lg font-bold text-brand">
+                <Link href="/" className="flex items-center gap-1.5 text-xl font-bold text-brand">
                     <span aria-hidden="true">🛍️</span> BuyBuddy
                 </Link>
                 <nav className="flex items-center gap-4 text-sm">

@@ -5,7 +5,7 @@ export default function ProductDetail({ product, bundle }) {
     const bundleTotal = bundle.reduce((s, b) => s + b.price, 0);
     return (
         <AppLayout>
-            <h1 className="text-lg font-semibold text-ink">{product.name}</h1>
+            <h1 className="text-2xl font-semibold text-ink">{product.name}</h1>
             <div className="mt-3 rounded-xl border border-ink/10 bg-cream-card shadow-soft">
                 <div className="flex items-center justify-between p-3">
                     <span className="text-sm text-ink-soft">เทียบราคา</span>
@@ -42,7 +42,7 @@ export default function ProductDetail({ product, bundle }) {
             )}
 
             <button onClick={() => router.post(`/plan/items/${product.id}`, {}, { preserveScroll: true })}
-                className="mt-4 w-full rounded-full bg-brand p-3 font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none">+ ใส่ลงแผน</button>
+                className="mt-4 w-full rounded-full bg-brand p-4 text-lg font-semibold text-white shadow-soft transition hover:bg-brand-500 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none">+ ใส่ลงแผน</button>
         </AppLayout>
     );
 }

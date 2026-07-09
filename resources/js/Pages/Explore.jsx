@@ -11,7 +11,7 @@ export default function Explore({ categories, activeCategory, query, products })
 
     return (
         <AppLayout>
-            <h1 className="text-lg font-semibold text-ink">เลือกดูของเอง</h1>
+            <h1 className="text-2xl font-semibold text-ink">เลือกดูของเอง</h1>
             <input
                 defaultValue={query}
                 placeholder="ค้นหาสินค้า"
