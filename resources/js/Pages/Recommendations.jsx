@@ -55,7 +55,7 @@ export default function Recommendations({ categories, budget, plannedTotal, read
             <div className="mt-3 space-y-2">
                 <ReadinessMeter percent={readiness.percent} />
                 <div className="rounded-2xl bg-cream-card p-4 shadow-soft">
-                    <div className="mb-1.5 text-sm font-medium text-ink-soft">🪙 งบ</div>
+                    <div className="mb-1.5 text-sm font-medium text-ink-soft">💰 งบ</div>
                     <BudgetMeter total={plannedTotal} budget={budget} />
                 </div>
             </div>
